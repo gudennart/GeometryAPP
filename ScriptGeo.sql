@@ -1,3 +1,7 @@
+Create Database Geometryapp;
+
+use GeometryApp;
+
 CREATE TABLE Square (
     SquareId integer not null auto_increment,
     StartX float,

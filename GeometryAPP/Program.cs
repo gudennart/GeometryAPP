@@ -1,45 +1,63 @@
-﻿using GeometryAPP.Context;
+﻿    using GeometryAPP.Context;
 using GeometryAPP.Model;
 using System;
 
 namespace GeometryAPP
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("########################################################################");
+            Console.WriteLine("###                    Ultimate Master Calculator                    ###");
+            Console.WriteLine("###                                                                  ###");
+            Console.WriteLine("###                                                                  ###");
+            Console.WriteLine("###  A execução dessa aplicação irá ler dois quadrados a partir de   ###");
+            Console.WriteLine("###    Seu ponto superior esquerdo e do tamanho de suas laterais     ###");
+            Console.WriteLine("###                                                                  ###");
+            Console.WriteLine("###                                                                  ###");
+            Console.WriteLine("###             Para Prosseguir aperte qualquer tecla                ###");
+            Console.WriteLine("###                                                                  ###");
+            Console.WriteLine("########################################################################");
+
+            Console.ReadKey();
+            var lSquare1 = new FullSquare();
+            var lSquare2 = new FullSquare();
+            try
+            {
+
+
+
+            Console.WriteLine("###                     Primeiro Quadrado                            ###");
+            LerQuadrado(lSquare1);
+            Console.WriteLine("###                      Segundo Quadrado                            ###");
+            LerQuadrado(lSquare2);
+            lSquare2.StartX = Convert.ToInt64(Console.ReadLine());
+            
             using (var db = new GeoContext())
             {
-                var lteste = new Square();
-                lteste.Size = 2;
-                lteste.StartX = 2;
-                lteste.StartY = 2;
-                db.Square.Add(lteste);
-
-                db.SaveChanges();
-
-                foreach (var lSquare in db.Square)
-                {
-                    Console.WriteLine(lSquare.SquareId);
-                }
-
-                var lLine = new Line();
-                lLine.StartX = 1;
-                lLine.StartY = 1;
-                lLine.EndX = 1;
-                lLine.EndY = 1;
-                db.Line.Add(lLine); 
-
-                db.SaveChanges();
-
-                foreach (var lLines in db.Line)
-                {
-                    Console.WriteLine(lLines.LineId);
-                }
+                db.Square.AddAsync(lSquare1);
+                db.Square.AddAsync(lSquare2);
+                db.SaveChangesAsync();
             }
 
-            Console.WriteLine("Press any key to exit...");
+            Console.WriteLine("Parabéns, o processamento acabou, agora vá buscar outro café...");
             Console.ReadKey();
+            }
+            catch( Exception e)
+            {
+                Console.WriteLine("Ocorreram erros durante o processamento: \r\n" + e.Message);
+            }
+        }
+
+        public static void LerQuadrado(Square pSquare)
+        {
+            Console.WriteLine("###         Insira a posição X do ponto superior esquerdo (Float)    ###");
+            pSquare.StartX = Convert.ToInt64(Console.ReadLine());
+            Console.WriteLine("###         Insira a posição Y do ponto superior esquerdo (Float)    ###");
+            pSquare.StartY = Convert.ToInt64(Console.ReadLine());
+            Console.WriteLine("###   Insira o comprimento total de uma lateral do quadrado(Int)     ###");
+            pSquare.Size = Convert.ToInt32(Console.ReadLine());
         }
     }
 }
