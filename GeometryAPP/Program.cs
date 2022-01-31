@@ -24,18 +24,16 @@ namespace GeometryAPP
 
             Console.ReadKey();
             
-            Line lLine = new();
-
             var lSquare1 = new FullSquare();
             var lSquare2 = new FullSquare();
             LineService _LineSerivce = new();
+            Line lLine = new();
             try
             {
                 Console.WriteLine("###                     Primeiro Quadrado                            ###");
                 LerQuadrado(lSquare1);
                 Console.WriteLine("###                      Segundo Quadrado                            ###");
                 LerQuadrado(lSquare2);
-                lSquare2.StartX = Convert.ToInt64(Console.ReadLine());
 
                 using (var db = new GeoContext())
                 {
@@ -48,7 +46,13 @@ namespace GeometryAPP
                 lSquare2.SetPoints();
 
                 var lTan = _LineSerivce.CalcTang(lSquare1.PC, lSquare2.PC);
-                
+
+                _LineSerivce.SetLinePoint(lSquare1, lTan, (lSquare1.StartX < lSquare2.StartX), lLine);
+                _LineSerivce.SetLinePoint(lSquare2, lTan, (lSquare2.StartX < lSquare1.StartX), lLine);
+
+                Console.Clear();
+
+
 
                 Console.WriteLine("Parabéns, o processamento acabou, agora vá buscar outro café...");
                 Console.ReadKey();

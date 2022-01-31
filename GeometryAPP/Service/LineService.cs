@@ -17,11 +17,63 @@ namespace GeometryAPP.Service
             return lY / lX;
         }
 
-        public Point GetFinalPoint (Square pSquare, float pTang, bool pDirection)
+        public void SetLinePoint(FullSquare pSquare, float pTang, bool pDirection, Line pLine)
         {
             var Result = new Point();
+            if (pDirection)
+            {
+                if (pTang > 1)
+                {
+                    Result.Y = pSquare.PID.Y;
+                    Result.X = pSquare.PC.X - (pSquare.Size / (2 * pTang));
+                }
+                else if (pTang > 0)
+                {
+                    Result.X = pSquare.StartX;
+                    Result.Y = pSquare.PC.Y + ((pSquare.Size / 2) * pTang);
+                }
+                else if (pTang > -1) 
+                {
+                    Result.X = pSquare.StartX;
+                    Result.Y = pSquare.PC.Y - ((pSquare.Size / 2 )* pTang);
+                }
+                else
+                {
+                    Result.Y = pSquare.StartY;
+                    Result.X = pSquare.PC.X - (pSquare.Size / (2 * pTang));
+                }
+                pLine.StartX = Result.X;
+                pLine.StartY = Result.Y;
 
-            return 
+            }
+            else
+            {
+
+                if (pTang > 1)
+                {
+                    Result.Y = pSquare.StartY;
+                    Result.X = pSquare.PC.X + (pSquare.Size / (2 * pTang));
+                }
+                else if (pTang > 0)
+                {
+                    Result.X = pSquare.PSD.X;
+                    Result.Y = pSquare.PC.Y + ((pSquare.Size / 2) * pTang);
+                }
+                else if (pTang > -1) 
+                {
+                    Result.X = pSquare.PSD.X;
+                    Result.Y = pSquare.PC.Y - ((pSquare.Size / 2) * pTang);
+                }
+                else
+                {
+                    Result.Y = pSquare.PID.Y;
+                    Result.X = pSquare.PC.X + (pSquare.Size / (2 * pTang));
+                }
+
+                pLine.EndX = Result.X;
+                pLine.EndY = Result.Y;
+            }
+
         }
     }
 }
