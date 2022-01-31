@@ -38,9 +38,9 @@ namespace GeometryAPP
 
                 using (var db = new GeoContext())
                 {
-                    db.Square.AddAsync(lSquare1);
-                    db.Square.AddAsync(lSquare2);
-                    db.SaveChangesAsync();
+                    db.Square.Add(lSquare1);
+                    db.Square.Add(lSquare2);
+                    db.SaveChanges();
                 }
 
                 lSquare1.SetPoints();
@@ -55,8 +55,8 @@ namespace GeometryAPP
 
                 using (var db = new GeoContext())
                 {
-                    db.Line.AddAsync(lLine);
-                    db.SaveChangesAsync();
+                    db.Line.Add(lLine);
+                    db.SaveChanges();
                 }
 
 

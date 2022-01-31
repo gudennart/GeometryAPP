@@ -11,7 +11,7 @@ namespace GeometryAPP.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL("server=localhost;database=geometryapp;user=root;password=Fisica1!");
+            optionsBuilder.UseMySQL(System.IO.File.ReadAllText(@"..\..\..\..\DBConectionString.txt"));   // Necessário informar a senha do Banco
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -32,6 +32,7 @@ namespace GeometryAPP.Context
             modelBuilder.Entity<Square>(entity =>
             {
                 entity.HasKey(e => e.SquareId);
+                entity.Property(e => e.SquareId).ValueGeneratedOnAdd().IsRequired();
                 entity.Property(e => e.StartX).IsRequired();
                 entity.Property(e => e.StartY).IsRequired();
                 entity.Property(e => e.Size).IsRequired();
