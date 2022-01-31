@@ -1,1 +1,1 @@
-server=localhost;database=geometryapp;user=root;password=Fisica1!
+server=localhost;database=geometryapp;user=root;password=
