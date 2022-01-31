@@ -11,9 +11,9 @@ namespace GeometryAPP
             using (var db = new GeoContext())
             {
                 var lteste = new Square();
-                lteste.Size = 1;
-                lteste.StartX = 1;
-                lteste.StartY = 1;
+                lteste.Size = 2;
+                lteste.StartX = 2;
+                lteste.StartY = 2;
                 db.Square.Add(lteste);
 
                 db.SaveChanges();
@@ -26,13 +26,15 @@ namespace GeometryAPP
                 var lLine = new Line();
                 lLine.StartX = 1;
                 lLine.StartY = 1;
-                db.Line.Add(lLine);
+                lLine.EndX = 1;
+                lLine.EndY = 1;
+                db.Line.Add(lLine); 
 
                 db.SaveChanges();
 
                 foreach (var lLines in db.Line)
                 {
-                    Console.WriteLine(lLine.LineId);
+                    Console.WriteLine(lLines.LineId);
                 }
             }
 
