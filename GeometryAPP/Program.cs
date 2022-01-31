@@ -23,11 +23,12 @@ namespace GeometryAPP
             Console.WriteLine("########################################################################");
 
             Console.ReadKey();
-            
+            Console.WriteLine();
             var lSquare1 = new FullSquare();
             var lSquare2 = new FullSquare();
             LineService _LineSerivce = new();
             Line lLine = new();
+
             try
             {
                 Console.WriteLine("###                     Primeiro Quadrado                            ###");
@@ -51,6 +52,37 @@ namespace GeometryAPP
                 _LineSerivce.SetLinePoint(lSquare2, lTan, (lSquare2.StartX < lSquare1.StartX), lLine);
 
                 Console.Clear();
+
+                using (var db = new GeoContext())
+                {
+                    db.Line.AddAsync(lLine);
+                    db.SaveChangesAsync();
+                }
+
+
+
+                Console.WriteLine("########################################################################");
+                Console.WriteLine("##                                                                   ###");
+                Console.WriteLine("##             Após os complexos calculos necessarios                ###");
+                Console.WriteLine("##      O Resultado encontrado foi uma linha saida do ponto          ###");
+                Console.WriteLine("##                                                                   ###");
+                Console.WriteLine("##                   X = " + lLine.StartX.ToString("0.0") + "            e Y = " + lLine.StartY.ToString("0.0") + "                    ###");
+                Console.WriteLine("##                                                                   ###");
+                Console.WriteLine("##                 E indo em direção ao ponto                        ###");
+                Console.WriteLine("##                                                                   ###");
+                Console.WriteLine("##                   X = " + lLine.EndX.ToString("0.0") + "            e Y = " + lLine.EndY.ToString("0.0") + "                   ###");
+                Console.WriteLine("##                                                                   ###");
+                Console.WriteLine("##                                                                   ###");
+                Console.WriteLine("##                    #                                              ###");
+                Console.WriteLine("##                      #                                            ###");
+                Console.WriteLine("##                        #                                          ###");
+                Console.WriteLine("##                           #                                       ###");
+                Console.WriteLine("##                              #                                    ###");
+                Console.WriteLine("##                                 #                                 ###");
+                Console.WriteLine("##                                    #                              ###");
+                Console.WriteLine("##                                       #                           ###");
+                Console.WriteLine("##                                          #                        ###");
+                Console.WriteLine("########################################################################");
 
 
 

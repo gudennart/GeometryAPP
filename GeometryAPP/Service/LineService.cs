@@ -22,14 +22,29 @@ namespace GeometryAPP.Service
             var Result = new Point();
             if (pDirection)
             {
-                if (pTang > 1)
+
+                if (pTang == 0) // Quadrados Paralelos
+                {
+                    Result.Y = pSquare.PC.Y;
+                    Result.X = pSquare.PIE.X;
+                }
+                else if(pTang == 1) // Angulo de 45°
+                {
+                    Result = pSquare.PIE;                  //Primeiro eu checo todas as "constantes" que não precisam de conta;
+                }
+                else if (pTang == -1) // Angulo de "-45°" (315°)
+                {
+                    Result.X = pSquare.StartX;
+                    Result.Y = pSquare.StartY;
+                }
+                else if (pTang > 1)
                 {
                     Result.Y = pSquare.PID.Y;
                     Result.X = pSquare.PC.X - (pSquare.Size / (2 * pTang));
                 }
                 else if (pTang > 0)
                 {
-                    Result.X = pSquare.StartX;
+                    Result.X = pSquare.StartX;                  // Depois eu valido abranjo todas as contas propriamente ditas
                     Result.Y = pSquare.PC.Y + ((pSquare.Size / 2) * pTang);
                 }
                 else if (pTang > -1) 
@@ -48,8 +63,20 @@ namespace GeometryAPP.Service
             }
             else
             {
-
-                if (pTang > 1)
+                if (pTang == 0) // Quadrados paralelos 
+                {
+                    Result.Y = pSquare.PC.Y;
+                    Result.X = pSquare.PID.X;
+                }
+                else if (pTang == 1) // Angulo de 45° 
+                {
+                    Result = pSquare.PSD;    
+                }
+                else if (pTang == -1) // Angulo de "-45°" (315°) 
+                {
+                    Result = pSquare.PID;
+                }
+                else if (pTang > 1)
                 {
                     Result.Y = pSquare.StartY;
                     Result.X = pSquare.PC.X + (pSquare.Size / (2 * pTang));
